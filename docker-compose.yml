@@ -9,4 +9,25 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=gameshopdb
+      - DB_USER=devkonrad
+      - DB_PASS=2003
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=gameshopdb
+      - POSTGRES_USER=devkonrad
+      - POSTGRES_PASSWORD=2003
+
+volumes:
+  dev-db-data: 
