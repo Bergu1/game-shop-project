@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'loginPage.css' %}">
+</head>
+<body>
+
+    <div class="top-bar">
+        <p>Game Store - DamKon</p>
+    </div>
+    <div class="login-container">
+        <form method="post">
+            <p class="login-title">Login</p>
+            <label for="username">Username: </label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            
+         
+            <label for="password">Password: </label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <button type="submit">Login</button>
+        </form>
+
+        <div>
+            <p class="bottom-options">Don't have account? <a href="{% url 'registration' %}">Register here</a></p>
+            <p class="bottom-options">Forgot your password? <a>Press here</a></p>
+        </div>
+    </div>
+</body>
+</html>

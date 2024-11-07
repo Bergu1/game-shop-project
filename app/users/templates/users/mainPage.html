@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'mainPage.css' %}">
+</head>
+
+<body>
+    <div class="top-bar">
+        <p>Game Store - DamKon</p>
+    </div>
+    <div class="sidebar">
+        <a href="#" class="list"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="list"><i class="fas fa-gamepad"></i> Store</a>
+        <a href="#" class="list"><i class="fas fa-book"></i> Library</a>
+        <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
+        <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
+        <a href="#" class="list"><i class="fas fa-wallet"></i> Wallet</a>
+
+    <form method="post" action="#">
+        <div>
+            <label>Choose your currency:</label>
+            <select>
+                <option value="USD" >USD</option>
+                <option value="EUR" >EUR</option>
+                <option value="PLN" >PLN</option>
+            </select>
+        </div>
+        <button>Set Currency</button>
+    </form>
+    <a href="#" class="logoutB">Log out</a>
+    </div>
+</body>
+</html>

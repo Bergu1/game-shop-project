@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+
+    <link rel="stylesheet" href="{% static 'registerPage.css' %}">
+</head>
+<body>
+
+    <div class="top-bar">
+        <p>Game Store - DamKon</p>
+    </div>
+    <div class="register-container">
+        <form method="post">
+            <p class="register-title">Registration</p>
+            <label for="username">First name: </label><br>
+            <input type="text" id="first-name" name="first-name" required><br><br>
+            <label for="last-name">Last name: </label><br>
+            <input type="text" id="last-nem" name="last-name" required><br><br>
+            <label for="email">E-mail: </label><br>
+            <input type="emial" id="email" name="email" required><br><br>
+            <label for="date-of-birth">Date of birth: </label><br>
+            <input type="date" id="date-of-birth" name="date-of-birth" required><br><br>
+        </form>
+    </div>
+
+    <div class="register-container2">
+        <form method="post">
+            <p class="register-title"></p>
+            <label for="username">Username: </label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password: </label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <label for="confirm_password">Confirm password: </label><br>
+            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+            <button type="submit">Register</button>
+        </form>
+        <div>
+            <p class="bottom-options">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>
