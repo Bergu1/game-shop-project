@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 {% load static %}
+{% csrf_token %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>Wallet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'mainPage.css' %}">
+    <link rel="stylesheet" href="{% static 'wallet_view.css' %}">
 </head>
 
 <body>
     <div class="top-bar">
-        <p>Game Store - DamKon - Home</p>
+        <p>Game Store - DamKon - Wallet</p>
     </div>
     <div class="sidebar">
         <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
@@ -34,6 +36,28 @@
         <button>Set Currency</button>
     </form>
     <a href="{% url 'logout' %}" class="logoutB">Log out</a>
+    </div>
+    <div class="wallet-content">
+        <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
+
+        <h3 class="subtitle">Options:</h3>
+        <div class="options">
+            <form method="post" action="{% url 'wallet_operations' %}", class="option">
+                {% csrf_token %}
+                <p>Do you want to add funds to your account? </p>
+                <button class="add-button">Press Here</button>
+            </form>
+            <form method="post" action="#",  class="option">
+                {% csrf_token %}
+                <p>Do you want to see your account history? </p>
+                <button class="add-button">Press Here</button>
+            </form>
+            <form method="post" action="#",  class="option">
+                {% csrf_token %}
+                <p>Do you want to change your account data? </p>
+                <button class="add-button">Press Here</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

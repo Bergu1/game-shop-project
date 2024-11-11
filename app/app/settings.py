@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'coredb',
     'users',
     'store',
+    'wallet',
 ]
 
 MIDDLEWARE = [

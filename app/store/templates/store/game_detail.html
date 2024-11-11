@@ -20,7 +20,7 @@
         <a href="#" class="list"><i class="fas fa-book"></i> Library</a>
         <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
         <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
-        <a href="#" class="list"><i class="fas fa-wallet"></i> Wallet</a>
+        <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
 
         <form method="post" action="#" class="mainPage">
             <div>
@@ -36,13 +36,22 @@
         <a href="{% url 'logout' %}" class="logoutB">Log out</a>
     </div>
     <div class="content">
+        {% csrf_token %}
         <div class="game-detail">
             <div>
                 <h1 class='tittle'>{{ game.tittle }}</h1>
                 <p class='price'>{{ game.price }} PLN</p>
                 <p class='description'>{{ game.description }}</p>
-                <button class="buy-button">Buy</button>
-                <button class="buy-button">Buy as a gift</button>
+            <div class="button-container">
+                <form method="post" action="{% url 'buy_game' game.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="buy-button">Buy</button>
+                </form>
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <button class="buy-button">Buy as a gift</button>
+                </form>
+            </div>
             </div>
             <div>
                 <img src="{{ game.image.url }}" alt="{{ game.name }}">

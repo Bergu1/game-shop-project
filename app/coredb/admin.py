@@ -50,3 +50,20 @@ class GamesAdmin(admin.ModelAdmin):
                     'price', 'image']
 
 admin.site.register(models.Games, GamesAdmin)
+
+
+class PersonGamesAdmin(admin.ModelAdmin):
+    ordering = ['id']
+    list_display = ['id', 'person', 'game', 'date']
+
+
+admin.site.register(models.PersonGames, PersonGamesAdmin)
+
+
+
+class AccountHistoryAdmin(admin.ModelAdmin):
+    ordering = ['id']
+    list_display = ['id', 'person', 'game', 'date', 'amount']
+    
+
+admin.site.register(models.AccountHistory, AccountHistoryAdmin)

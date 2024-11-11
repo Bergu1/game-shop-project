@@ -14,15 +14,24 @@
     <div class="top-bar">
         <p>Game Store - DamKon - Store</p>
     </div>
+    <div id="popup-message-container">
+        {% for message in messages %}
+            <div class="popup-message {{ message.tags }}">
+                {{ message }}
+                <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+            </div>
+        {% endfor %}
+    </div>   
     <div class="sidebar">
         <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
         <a href="{% url 'store' %}" class="list"><i class="fas fa-gamepad"></i> Store</a>
         <a href="#" class="list"><i class="fas fa-book"></i> Library</a>
         <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
         <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
-        <a href="#" class="list"><i class="fas fa-wallet"></i> Wallet</a>
+        <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
 
         <form method="post" action="#" class="mainPage">
+            {% csrf_token %}
             <div>
                 <label>Choose your currency:</label>
                 <select>
@@ -52,5 +61,15 @@
             {% endfor %}
         </div>
     </div>
+    <script>
+        function closePopupMessage() {
+            const messageContainer = document.getElementById("popup-message-container");
+            if (messageContainer) {
+                messageContainer.style.display = "none";
+            }
+        }
+    
+        setTimeout(closePopupMessage, 3000);
+    </script>
 </body>
 </html>

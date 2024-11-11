@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
 
 
 class PersonManager(BaseUserManager):
@@ -56,3 +57,24 @@ class Games(models.Model):
     class Meta:
         verbose_name = 'Game' 
         verbose_name_plural = 'Games'
+
+
+class PersonGames(models.Model):
+    person = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    game = models.ForeignKey('Games', on_delete=models.CASCADE)
+    date = models.DateField()
+
+    class Meta:
+        verbose_name = 'person_game' 
+        verbose_name_plural = 'person_games'
+
+
+class AccountHistory(models.Model):
+    person = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    game = models.ForeignKey('Games', on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'accounthistory' 
+        verbose_name_plural = 'accounthistory'

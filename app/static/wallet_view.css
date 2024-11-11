@@ -1,0 +1,71 @@
+.wallet-content {
+    margin-left: 250px;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.title{
+    font-size: 50px;
+    margin-left: 40px;
+    font-weight: bold;
+    margin-bottom: 130px;
+}
+
+.add-button{
+    width: 100px;
+    height: 35px;
+    padding: 5px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.add-button:hover {
+    background-color: #777;
+}
+
+.options {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+form.option {
+    margin-left: 40px; 
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-top: 30px;
+    margin-left: 50px; 
+    font-size: 30px;
+    font-weight: bold;
+} 
+
+
+.amount-input {
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+}
+
+.amount-input:focus {
+    border-color: #777;
+    outline: none;
+}
+
+
+form.option2 {
+    margin-left: 300px; 
+    font-size: 25px;
+    font-weight: bold;
+}

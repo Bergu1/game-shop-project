@@ -27,6 +27,13 @@
     align-self: flex-start;
 }
 
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-left: 40px;
+    align-items: center;
+}
+
 .buy-button{
     width: 150px;
     height: 50px;
@@ -38,7 +45,7 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 20px;
-    margin-left: 40px; 
+    margin-left: 40px;
 }
 
 .buy-button:hover {
