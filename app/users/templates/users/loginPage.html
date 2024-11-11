@@ -13,8 +13,17 @@
     <div class="top-bar">
         <p>Game Store - DamKon</p>
     </div>
+    <div id="popup-message-container">
+        {% for message in messages %}
+            <div class="popup-message {{ message.tags }}">
+                {{ message }}
+                <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+            </div>
+        {% endfor %}
+    </div>   
     <div class="login-container">
         <form method="post">
+            {% csrf_token %}
             <p class="login-title">Login</p>
             <label for="username">Username: </label><br>
             <input type="text" id="username" name="username" required><br><br>
@@ -31,5 +40,15 @@
             <p class="bottom-options">Forgot your password? <a>Press here</a></p>
         </div>
     </div>
+    <script>
+        function closePopupMessage() {
+            const messageContainer = document.getElementById("popup-message-container");
+            if (messageContainer) {
+                messageContainer.style.display = "none";
+            }
+        }
+    
+        setTimeout(closePopupMessage, 3000);
+    </script>
 </body>
 </html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'coredb',
     'users',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,8 @@ STATIC_ROOT = '/vol/web/static'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+AUTH_USER_MODEL = 'coredb.Person'
 
 
 # Default primary key field type

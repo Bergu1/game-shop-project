@@ -55,7 +55,7 @@ body {
     color: #aaa;
 }
 
-form {
+form.mainPage {
     background-color: #222;
     color: white;
     padding: 20px;
@@ -70,12 +70,12 @@ form {
     margin-right: 6px;
 }
 
-form div {
+form.mainPage div {
     margin-bottom: 15px;
     font-size: medium;
 }
 
-form label {
+form.mainPage label {
     display: block;
     font-weight: bold;
     color: white;
@@ -83,7 +83,7 @@ form label {
     font-size:14px;
 }
 
-form select {
+form.mainPage select {
     width: 100%;
     padding: 10px;
     background-color: #333;
@@ -92,7 +92,7 @@ form select {
     border-radius: 3px;
 }
 
-form button {
+form.mainPage button {
     width: 100%;
     padding: 10px;
     background-color: #555;
@@ -104,7 +104,7 @@ form button {
     cursor: pointer;
 }
 
-form button:hover {
+form.mainPage button:hover {
     background-color: #777;
 }
 
