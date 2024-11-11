@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('store.urls')),
     path('', include('wallet.urls')),
+    path('', include('library.urls')),
 ]
 
 

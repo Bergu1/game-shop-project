@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store</title>
+    <title>Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'mainPage.css' %}">
-    <link rel="stylesheet" href="{% static 'game_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'store.css' %}">
 </head>
 
 <body>
     <div class="top-bar">
-        <p>Game Store - DamKon - Store</p>
+        <p>Game Store - DamKon - Library</p>
     </div>
     <div class="sidebar">
         <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
@@ -23,6 +23,7 @@
         <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
 
         <form method="post" action="#" class="mainPage">
+            {% csrf_token %}
             <div>
                 <label>Choose your currency:</label>
                 <select>
@@ -35,27 +36,16 @@
         </form>
         <a href="{% url 'logout' %}" class="logoutB">Log out</a>
     </div>
+
     <div class="content">
-        {% csrf_token %}
-        <div class="game-detail">
-            <div>
-                <h1 class='tittle'>{{ game.tittle }}</h1>
-                <p class='price'>{{ game.price }} PLN</p>
-                <p class='description'>{{ game.description }}</p>
-            <div class="button-container">
-                <form method="post" action="{% url 'buy_game' game.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="buy-button">Buy</button>
-                </form>
-                <form method="post" action="#">
-                    {% csrf_token %}
-                    <button class="buy-button">Buy as a gift</button>
-                </form>
-            </div>
-            </div>
-            <div>
-                <img src="{{ game.image.url }}" alt="{{ game.name }}">
-            </div>
+        <h2>Games Store</h2>
+        <div class="games-list">
+            {% for game in user_games %}
+                <div class="game-item2">
+                    <img src="{{ game.game.image.url }}" alt="{{ game.game.name }}">
+                    <h3>{{ game.game.tittle }}</h3>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </body>

@@ -18,7 +18,7 @@
     <div class="sidebar">
         <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
         <a href="{% url 'store' %}" class="list"><i class="fas fa-gamepad"></i> Store</a>
-        <a href="#" class="list"><i class="fas fa-book"></i> Library</a>
+        <a href="{% url 'library' %}" class="list"><i class="fas fa-book"></i> Library</a>
         <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
         <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
         <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
@@ -47,14 +47,9 @@
                 <p>Do you want to add funds to your account? </p>
                 <button class="add-button">Press Here</button>
             </form>
-            <form method="post" action="#",  class="option">
+            <form method="post" action="{% url 'account_history' %}",  class="option">
                 {% csrf_token %}
                 <p>Do you want to see your account history? </p>
-                <button class="add-button">Press Here</button>
-            </form>
-            <form method="post" action="#",  class="option">
-                {% csrf_token %}
-                <p>Do you want to change your account data? </p>
                 <button class="add-button">Press Here</button>
             </form>
         </div>
