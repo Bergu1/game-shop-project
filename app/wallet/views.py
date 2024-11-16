@@ -23,7 +23,9 @@ def wallet_operations(request):
         if form.is_valid():
             amount = form.cleaned_data['amount']
             with transaction.atomic():
-                AccountHistory.objects.create(person=user, date=timezone.now(), amount=amount)
+                AccountHistory.objects.create(person=user,
+                                              date=timezone.now(),
+                                              amount=amount)
                 user.total_balance += amount
                 user.save()
             return redirect('wallet_view')
@@ -52,7 +54,9 @@ def account_history(request):
         try:
             month = int(month)
             year = int(year)
-            account_history = AccountHistory.objects.filter(person=user, date__year=year, date__month=month)
+            account_history = AccountHistory.objects.filter(person=user,
+                                                            date__year=year,
+                                                            date__month=month)
             for entry in account_history:
                 if entry.game is None:
                     incomes.append(entry)  

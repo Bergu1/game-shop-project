@@ -15,7 +15,10 @@ def registration(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
-
+        
+        if not username:
+            messages.error(request, "Recipient username is required.")
+            return render(request, 'users/registerPage.html')
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
             return render(request, 'users/registerPage.html')

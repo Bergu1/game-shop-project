@@ -43,12 +43,10 @@
                 <p class='price'>{{ game.price }} PLN</p>
                 <p class='description'>{{ game.description }}</p>
             <div class="button-container">
-                <form method="post" action="{% url 'buy_game' game.id %}">
-                    {% csrf_token %}
+                <form method="GET" action="{% url 'buy_game' game.id %}">
                     <button type="submit" class="buy-button">Buy</button>
                 </form>
-                <form method="post" action="#">
-                    {% csrf_token %}
+                <form method="GET" action="{% url 'game_gift' game.id %}">
                     <button class="buy-button">Buy as a gift</button>
                 </form>
             </div>
