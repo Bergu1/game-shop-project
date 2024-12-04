@@ -125,3 +125,7 @@ form.mainPage button:hover {
 .logoutB:hover {
     background-color: #777;
 }
+
+.content-container{
+    margin: 120px auto;
+}

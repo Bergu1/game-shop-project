@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Sending invitations{% endblock %}
+
+{% block header_title %}Sending invitations{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'friends/send_friend_request.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block announcement %}
+<div id="popup-message-container">
+    {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+            {{ message }}
+            <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+        </div>
+    {% endfor %}
+</div>  
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <div class="container">
+        <h2>Send Friend Request</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Send Request</button>
+        </form>
+        <a href="{% url 'friends' %}">Back to Friends</a>
+    </div>
+    {% block extra_js %}
+    <script>
+    function closePopupMessage() {
+        const messageContainer = document.getElementById("popup-message-container");
+        if (messageContainer) {
+            messageContainer.style.display = "none";
+        }
+    }
+
+    setTimeout(closePopupMessage, 3000);
+    </script>
+{% endblock %}
+{% endblock %}

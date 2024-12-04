@@ -1,0 +1,80 @@
+.wallet-content {
+    margin-left: 100px;
+    padding: 20px;
+}
+
+.title{
+    margin-left: 100px;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 130px;
+}
+
+.add-button{
+    width: 200px;
+    height: 55px;
+    padding: 5px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.add-button:hover {
+    background-color: #777;
+}
+
+.options {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+form.option {
+    margin-left: 180px; 
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.amount-input {
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+}
+
+.amount-input:focus {
+    border-color: #777;
+    outline: none;
+}
+
+
+form.option2 {
+    margin-left: 150px; 
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.add-button2{
+    width: 200px;
+    height: 55px;
+    padding: 5px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.add-button2:hover {
+    background-color: #5f2f2f;
+}

@@ -1,123 +1,95 @@
 <!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account History</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'mainPage.css' %}">
-    <link rel="stylesheet" href="{% static 'account_history.css' %}">
-</head>
 
-<body>
-    <div class="top-bar">
-        <p>Game Store - DamKon - Account History</p>
-    </div>
-    <div class="sidebar">
-        <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
-        <a href="{% url 'store' %}" class="list"><i class="fas fa-gamepad"></i> Store</a>
-        <a href="{% url 'library' %}" class="list"><i class="fas fa-book"></i> Library</a>
-        <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
-        <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
-        <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
+{% block title %}Account History{% endblock %}
 
-    <form method="post" action="#" class="mainPage">
-        {% csrf_token %}
-        <div>
-            <label>Choose your currency:</label>
-            <select>
-                <option value="USD" >USD</option>
-                <option value="EUR" >EUR</option>
-                <option value="PLN" >PLN</option>
-            </select>
-        </div>
-        <button>Set Currency</button>
+{% block header_title %}Account History{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'wallet/account_history.css' %}">
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<div class="content-container">
+    <form class="history_date">
+        <label for="month">Month:</label>
+        <select name="month" id="month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+
+        <label for="year">Year:</label>
+        <select name="year" id="year">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Submit</button>
     </form>
-    <a href="{% url 'logout' %}" class="logoutB">Log out</a>
-    </div>
 
-    <div class="content-container">
-        <!-- Formularz wyboru daty -->
-        <form class="history_date">
-            <label for="month">Month:</label>
-            <select name="month" id="month">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-    
-            <label for="year">Year:</label>
-            <select name="year" id="year">
-                {% for year in years %}
-                <option value="{{ year }}">{{ year }}</option>
-                {% endfor %}
-            </select>
-    
-            <button type="submit">Submit</button>
-        </form>
-    
-        <div class="tables-container">
-            <div class="table-expenses">
-                <h2>Expenses</h2>
-                <table>
-                    <thead>
+    <div class="tables-container">
+        <div class="table-expenses">
+            <h2>Expenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Game</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
                         <tr>
-                            <th>Date</th>
-                            <th>Game</th>
-                            <th>Amount</th>
+                            <td>{{ expense.date }}</td>
+                            <td>{{ expense.game.tittle }}</td>
+                            <td>{{ expense.amount }} PLN</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for expense in expenses %}
-                            <tr>
-                                <td>{{ expense.date }}</td>
-                                <td>{{ expense.game.tittle }}</td>
-                                <td>{{ expense.amount }} PLN</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="3">No expenses for the selected period.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No expenses for the selected period.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-            <div class="table-incomes">
-                <h2>Incomes</h2>
-                <table>
-                    <thead>
+        <div class="table-incomes">
+            <h2>Incomes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for income in incomes %}
                         <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
+                            <td>{{ income.date }}</td>
+                            <td>{{ income.amount }} PLN</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for income in incomes %}
-                            <tr>
-                                <td>{{ income.date }}</td>
-                                <td>{{ income.amount }} PLN</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="2">No incomes for the selected period.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">No incomes for the selected period.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-    
-</body>
-</html>
+</div>
+{% endblock %}

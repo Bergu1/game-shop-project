@@ -2,11 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from coredb.models import Games, AccountHistory, PersonGames, Person
 from django.contrib import messages
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def store_view(request):
     games = Games.objects.all()
     return render(request, 'store/gamestore.html', {'games': games})
 
+
+@login_required
 def buy_game(request, id):
     user = request.user
     game = get_object_or_404(Games, id=id)
@@ -34,11 +39,13 @@ def buy_game(request, id):
         messages.error(request, "Not enough money in your account.")
     return redirect('store')
 
+
 def game_detail(request, id):
     game = get_object_or_404(Games, id=id)
     return render(request, 'store/game_detail.html', {'game': game})
 
 
+@login_required
 def buygame_as_gift(request, id):
     game = get_object_or_404(Games, id=id)
 

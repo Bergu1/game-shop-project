@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Friends{% endblock %}
+
+{% block header_title %}Friends{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'friends/main_friends.css' %}">
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <form method="GET" action="{% url 'send_friend_request'%}" class="box_info">
+        <h2>If you want to add new friends</h2>
+        <button class="box_button">Press Here</button>
+    </form>
+    <div class="box_info">
+        <h2>If you want to check the status of invitations</h2>
+        <button class="box_button">Press Here</button>
+    </div>
+    <div class="box_info">
+        <h2>If you want to check the list of your friends</h2>
+        <button class="box_button">Press Here</button>
+    </div>
+{% endblock %}

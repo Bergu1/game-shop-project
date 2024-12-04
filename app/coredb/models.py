@@ -47,6 +47,7 @@ class Person(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
+
 class Games(models.Model):
     id = models.BigAutoField(primary_key=True)
     tittle = models.CharField(max_length=100)
@@ -78,3 +79,14 @@ class AccountHistory(models.Model):
     class Meta:
         verbose_name = 'accounthistory' 
         verbose_name_plural = 'accounthistory'
+
+
+class Friends(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="sent_requests", on_delete=models.CASCADE)
+    recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="received_requests", on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'friends' 
+        verbose_name_plural = 'friends'

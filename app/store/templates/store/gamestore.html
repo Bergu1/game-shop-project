@@ -1,75 +1,51 @@
 <!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'mainPage.css' %}">
-    <link rel="stylesheet" href="{% static 'store.css' %}">
-</head>
 
-<body>
-    <div class="top-bar">
-        <p>Game Store - DamKon - Store</p>
-    </div>
-    <div id="popup-message-container">
-        {% for message in messages %}
-            <div class="popup-message {{ message.tags }}">
-                {{ message }}
-                <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+{% block title %}Store{% endblock %}
+
+{% block header_title %}Store{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'store/store.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block announcement %}
+<div id="popup-message-container">
+    {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+            {{ message }}
+            <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+        </div>
+    {% endfor %}
+</div>  
+{% endblock %}
+
+{% block content %}
+    <div class="games-list">
+        {% for game in games %}
+            <div class="game-item" onclick="window.location.href='{% url 'game_detail' game.id %}'">
+                <img src="{{ game.image.url }}" alt="{{ game.name }}">
+                <h3>{{ game.tittle }}</h3>
+                <p>{{ game.price }} PLN</p>
+                <form method="post" action="{% url 'buy_game' game.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="buy-button">Buy</button>
+                </form>
             </div>
         {% endfor %}
-    </div>   
-    <div class="sidebar">
-        <a href="{% url 'mainPage' %}" class="list"><i class="fas fa-home"></i> Home</a>
-        <a href="{% url 'store' %}" class="list"><i class="fas fa-gamepad"></i> Store</a>
-        <a href="{% url 'library' %}" class="list"><i class="fas fa-book"></i> Library</a>
-        <a href="#" class="list"><i class="fas fa-user-friends"></i> Friends</a>
-        <a href="#" class="list"><i class="fas fa-user"></i> Account</a>
-        <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
-
-        <form method="post" action="#" class="mainPage">
-            {% csrf_token %}
-            <div>
-                <label>Choose your currency:</label>
-                <select>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="PLN">PLN</option>
-                </select>
-            </div>
-            <button>Set Currency</button>
-        </form>
-        <a href="{% url 'logout' %}" class="logoutB">Log out</a>
     </div>
-
-    <div class="content">
-        <h2>Games Store</h2>
-        <div class="games-list">
-            {% for game in games %}
-                <div class="game-item" onclick="window.location.href='{% url 'game_detail' game.id %}'">
-                    <img src="{{ game.image.url }}" alt="{{ game.name }}">
-                    <h3>{{ game.tittle }}</h3>
-                    <p>{{ game.price }} PLN</p>
-                    <form method="post" action="{% url 'buy_game' game.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="buy-button">Buy</button>
-                    </form>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    <script>
+    {% block extra_js %}
+        <script>
         function closePopupMessage() {
             const messageContainer = document.getElementById("popup-message-container");
             if (messageContainer) {
                 messageContainer.style.display = "none";
             }
         }
-    
+
         setTimeout(closePopupMessage, 3000);
-    </script>
-</body>
-</html>
+        </script>
+    {% endblock %}
+{% endblock %}

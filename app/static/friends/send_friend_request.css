@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    margin: 120px 0 50px 0;
+    text-align: center;
+    color: #333;
+    font-size: 30px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #222;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div.container {
+    background: #f4f4f4;
+    padding: 20px 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    width: 500px; 
+    max-width: 90%; 
+    height: 500px;
+    margin-left: 150px;
+}
+
+form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #222;;
+    outline: none;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+}

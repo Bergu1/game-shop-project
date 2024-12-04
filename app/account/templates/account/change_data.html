@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Update Records{% endblock %}
+
+{% block header_title %}Update Records{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'account/change_data.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block announcement %}
+<div id="popup-message-container">
+    {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+            {{ message }}
+            <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+        </div>
+    {% endfor %}
+</div>  
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<div class="content-container">
+    <form class="records" method="POST">
+        {% csrf_token %}
+        <label for="select_record">Select which record do you want to change:</label>
+        <select name="record" id="record" onchange="handleRecordChange()">
+            <option value="first_name">First name</option>
+            <option value="last_name">Last name</option>
+            <option value="email">E-mail</option>
+            <option value="date-of-birth">Date of birth</option>
+            <option value="username">Username</option>
+            <option value="password">Password</option>
+        </select>
+
+        <label for="update">Enter new value:</label>
+        <input type="text" id="update" name="update" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function handleRecordChange() {
+        const recordSelect = document.getElementById('record');
+        const updateInput = document.getElementById('update');
+
+        if (recordSelect.value === 'date-of-birth') {
+            updateInput.type = 'date';
+        } else if (recordSelect.value === 'password') {
+            updateInput.type = 'password'; 
+        } else {
+            updateInput.type = 'text'; 
+        }
+    }
+
+</script>
+{% endblock %}
