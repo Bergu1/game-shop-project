@@ -71,7 +71,7 @@ admin.site.register(models.AccountHistory, AccountHistoryAdmin)
 
 class FriendsAdmin(admin.ModelAdmin):
     ordering = ['id']
-    list_display = ['sender', 'recipient', 'status', 'created_at']
+    list_display = ['id', 'sender', 'recipient', 'status', 'created_at']
     
 
 admin.site.register(models.Friends, FriendsAdmin)

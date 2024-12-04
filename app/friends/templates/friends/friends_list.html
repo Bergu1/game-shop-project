@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Friends list{% endblock %}
+
+{% block header_title %}Friends list{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'friends/friends_list.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block announcement %}
+<div id="popup-message-container">
+    {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+            {{ message }}
+            <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+        </div>
+    {% endfor %}
+</div>  
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<div class="container">
+    <h1>Your Friends</h1>
+
+    {% if friends_list %}
+        <ul>
+            {% for friend in friends_list %}
+            <li>
+                {% if friend.sender == request.user %}
+                    {{ friend.recipient.username }}
+                {% else %}  
+                    {{ friend.sender.username }}
+                {% endif %}
+                <form action="{% url 'remove_friend' friend.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no friends yet.</p>
+    {% endif %}
+
+    <a href="{% url 'send_friend_request' %}">Send a Friend Request</a>
+    </div>
+    {% block extra_js %}
+    <script>
+    function closePopupMessage() {
+        const messageContainer = document.getElementById("popup-message-container");
+        if (messageContainer) {
+            messageContainer.style.display = "none";
+        }
+    }
+
+    setTimeout(closePopupMessage, 3000);
+    </script>
+    {% endblock %}
+{% endblock %}

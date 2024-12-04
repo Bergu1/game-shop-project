@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Invitations status{% endblock %}
+
+{% block header_title %}Invitations status{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'friends/invitations.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="container">
+    <h1>Your Invitations</h1>
+
+    <!-- Sekcja: Wysłane zaproszenia -->
+    <h2>Sent Invitations</h2>
+    <ul>
+        {% for invitation in sent_requests %}
+            <li>
+                Sent to: {{ invitation.recipient }} 
+                (Status: {{ invitation.get_status_display }}, Date: {{ invitation.created_at }})
+            </li>
+        {% empty %}
+            <li>You haven't sent any invitations.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Sekcja: Otrzymane zaproszenia -->
+    <h2>Invitations Received</h2>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for invitation in received_requests %}
+                <li>
+                    From: {{ invitation.sender.username }} (Sent: {{ invitation.created_at }})
+                    <input type="hidden" name="request_id" value="{{ invitation.id }}">
+                    <button type="submit" name="action" value="accept">Accept</button>
+                    <button type="submit" name="action" value="reject">Reject</button>
+                </li>
+            {% empty %}
+                <li>No new invitations.</li>
+            {% endfor %}
+        </ul>
+    </form>
+</div>
+{% endblock %}

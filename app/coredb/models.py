@@ -82,9 +82,14 @@ class AccountHistory(models.Model):
 
 
 class Friends(models.Model):
+    id = models.BigAutoField(primary_key=True)
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="sent_requests", on_delete=models.CASCADE)
     recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="received_requests", on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, default='Pending')
+    status = models.CharField(
+        max_length=10,
+        choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')],
+        default='pending'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

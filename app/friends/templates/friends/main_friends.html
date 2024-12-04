@@ -16,12 +16,12 @@
         <h2>If you want to add new friends</h2>
         <button class="box_button">Press Here</button>
     </form>
-    <div class="box_info">
+    <form method="GET" action="{% url 'invitations'%}" class="box_info">
         <h2>If you want to check the status of invitations</h2>
         <button class="box_button">Press Here</button>
-    </div>
-    <div class="box_info">
+    </form>
+    <form method="GET" action="{% url 'friends_list'%}" class="box_info">
         <h2>If you want to check the list of your friends</h2>
         <button class="box_button">Press Here</button>
-    </div>
+    </form>
 {% endblock %}
