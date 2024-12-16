@@ -1,69 +1,82 @@
 .wallet-content {
-    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    width: 1000px;
+    height: 150px;
     padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 9px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-left: 200px;
+    position: relative;
 }
 
-.title{
-    font-size: 50px;
-    font-weight: bold;
-    margin-bottom: 130px;
+.wallet-content h2 {
+    position: absolute;
+    left: 100px;
+    font-size: 25px;
+    color: #333;
+    margin-right: 35px;
+    text-align: center;
 }
 
-.add-button{
-    width: 100px;
-    height: 35px;
-    padding: 5px;
+.box_button {
+    position: absolute; 
+    padding: 10px 20px;
     background-color: #222;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    right: 100px;
 }
 
-.add-button:hover {
+.box_button:hover {
     background-color: #777;
 }
 
-.options {
-    margin-top: 50px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
+.title {
+    font-size: 2rem; 
+    color: #333; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    padding: 10px 0; 
+    border-bottom: 2px solid #ccc; 
+    font-family: 'Arial', sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    margin-left: 200px;
 }
-
-form.option {
-    margin-left: 180px; 
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.subtitle {
-    margin-top: 30px;
-    margin-left: 50px; 
-    font-size: 30px;
-    font-weight: bold;
-} 
-
-
-.amount-input {
-    width: 200px;
-    height: 40px;
-    padding: 5px;
-    font-size: 18px;
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
-}
-
-.amount-input:focus {
-    border-color: #777;
-    outline: none;
-}
-
 
 form.option2 {
-    margin-left: 150px; 
-    font-size: 25px;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    margin: 20px auto;
+}
+
+form.option2 label {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+form.option2 input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block header_title %}Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'news/news_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2 class="title">Latest News</h2>
+    {% for new in news %}
+        <div class="news-content" onclick="window.location.href='{% url 'news_detail' new.pk %}'">
+            <h3 class="news-title">{{ new.title }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

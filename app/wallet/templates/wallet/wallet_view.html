@@ -12,21 +12,16 @@
 
 {% block content %}
 {% csrf_token %}
-    <div class="wallet-content">
-        <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
+    <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
 
-        <h3 class="subtitle">Options:</h3>
-        <div class="options">
-            <form method="post" action="{% url 'wallet_operations' %}", class="option">
-                {% csrf_token %}
-                <p>Do you want to add funds to your account? </p>
-                <button class="add-button">Press Here</button>
-            </form>
-            <form method="post" action="{% url 'account_history' %}",  class="option">
-                {% csrf_token %}
-                <p>Do you want to see your account history? </p>
-                <button class="add-button">Press Here</button>
-            </form>
-        </div>
-    </div>
+    <form method="post" action="{% url 'wallet_operations' %}", class="wallet-content">
+        {% csrf_token %}
+        <h2>Do you want to add funds to your account? </h2>
+        <button class="box_button">Press Here</button>
+    </form>
+    <form method="post" action="{% url 'account_history' %}", class="wallet-content">
+        {% csrf_token %}
+        <h2>Do you want to see your account history? </h2>
+        <button class="box_button">Press Here</button>
+    </form>
 {% endblock %}

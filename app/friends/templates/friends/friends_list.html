@@ -31,15 +31,23 @@
         <ul>
             {% for friend in friends_list %}
             <li>
-                {% if friend.sender == request.user %}
-                    {{ friend.recipient.username }}
-                {% else %}  
-                    {{ friend.sender.username }}
-                {% endif %}
-                <form action="{% url 'remove_friend' friend.id %}" method="POST" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Remove</button>
-                </form>
+                <span>
+                    {% if friend.sender == request.user %}
+                        {{ friend.recipient.username }}
+                    {% else %}  
+                        {{ friend.sender.username }}
+                    {% endif %}
+                </span>
+                <div class="button-group">
+                    <form action="{% url 'friends_games' friend.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Profile</button>
+                    </form>
+                    <form action="{% url 'remove_friend' friend.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
             </li>
             {% endfor %}
         </ul>

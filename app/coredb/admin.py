@@ -75,3 +75,11 @@ class FriendsAdmin(admin.ModelAdmin):
     
 
 admin.site.register(models.Friends, FriendsAdmin)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    ordering = ['id']
+    list_display = ['id', 'image', 'title', 'content', 'date']
+    
+
+admin.site.register(models.News, NewsAdmin)

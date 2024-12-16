@@ -7,7 +7,7 @@
 {% block header_title %}Pay an amount{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'wallet/wallet_view.css' %}">
+<link rel="stylesheet" href="{% static 'wallet/wallet_pay.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,6 +17,7 @@
             {% csrf_token %}
             {{ form.amount.label }}
             {{ form.amount }}
+            <span class="currency">PLN</span>
             <button type="submit" class="add-button">Submit</button>
         </form>
 {% endblock %}

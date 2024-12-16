@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from coredb.models import Person
+from coredb.models import Person, News
 from django.contrib.auth.decorators import login_required
 
 def registration(request):
@@ -45,7 +45,7 @@ def registration(request):
 def login_view(request):
 
     if request.user.is_authenticated:
-        return redirect('mainPage')
+        return redirect('news_list')
     
     if request.method == 'POST':
 
@@ -56,7 +56,7 @@ def login_view(request):
         
         if user is not None:
             login(request, user)
-            return redirect('mainPage')
+            return redirect('news_list')
         else:
             messages.error(request, "Invalid username or password")
             return render(request, 'users/loginPage.html')
@@ -73,3 +73,12 @@ def logout_view(request):
 @login_required
 def mainPage(request):
     return render(request, 'users/mainPage.html')
+
+@login_required
+def news_list(request):
+    news = News.objects.all().order_by('-date')
+    return render(request, 'users/news_list.html', {'news': news})
+
+def news_detail(request, pk):
+    news_item = get_object_or_404(News, pk=pk)
+    return render(request, 'users/news_detail.html', {'news_item': news_item})

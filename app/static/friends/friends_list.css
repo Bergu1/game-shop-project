@@ -40,6 +40,11 @@ li span {
     font-weight: bold;
 }
 
+.button-group {
+    display: flex;
+    gap: 8px; 
+}
+
 button {
     background-color: #222;
     color: white;

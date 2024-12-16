@@ -95,3 +95,18 @@ class Friends(models.Model):
     class Meta:
         verbose_name = 'friends' 
         verbose_name_plural = 'friends'
+
+
+class News(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='news_images/', blank=True, null=True)
+    content = models.TextField()
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = 'news' 
+        verbose_name_plural = 'news'

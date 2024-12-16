@@ -1,4 +1,4 @@
-.info {
+.news-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,32 +12,16 @@
     margin-bottom: 100px;
     margin-left: 200px;
     position: relative;
+    cursor: pointer;
 }
 
-.info h2 {
+.news-title {
     position: absolute;
     left: 100px;
     font-size: 25px;
     color: #333;
     margin-right: 35px;
     text-align: center;
-}
-
-.box_button {
-    position: absolute; 
-    padding: 10px 20px;
-    background-color: #222;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-    transition: background-color 0.3s ease;
-    right: 100px;
-}
-
-.box_button:hover {
-    background-color: #777;
 }
 
 .title {
@@ -51,21 +35,4 @@
     text-transform: uppercase; 
     letter-spacing: 2px;
     margin-left: 200px;
-}
-
-.box_button2 {
-    position: absolute; 
-    padding: 10px 20px;
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-    transition: background-color 0.3s ease;
-    right: 100px;
-}
-
-.box_button:hover2 {
-    background-color: #9b3a3a;
 }

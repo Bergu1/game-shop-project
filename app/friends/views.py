@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from coredb.models import Friends
+from coredb.models import Friends, PersonGames
 from friends.forms import FriendForm
 from django.contrib import messages
 
@@ -97,3 +97,16 @@ def remove_friend(request, friend_id):
         messages.error(request, "You cannot remove this friend.")
     
     return redirect('friends_list')
+
+
+@login_required
+def friends_games(request, friend_id):
+    user = get_object_or_404(Friends, id=friend_id)
+    print("1")
+    if user.sender == request.user:
+        user_games = PersonGames.objects.filter(person=user.recipient)
+        print("2")
+    elif user.recipient == request.user:
+        user_games = PersonGames.objects.filter(person=user.sender)
+        print("3")
+    return render(request, 'friends/friends_games.html', {'user_games': user_games})

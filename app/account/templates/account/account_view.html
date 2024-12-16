@@ -13,19 +13,15 @@
 
 {% block content %}
 {% csrf_token %}
-    <div class="account-content">
-        <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
-        <div class="options">
-            <form method="GET" action="{% url 'change_data' %}", class="option">
-                {% csrf_token %}
-                <h2>Do you want to change your data? </h2>
-                <button class="add-button">Press Here</button>
-            </form>
-            <form method="GET" action="{% url 'delete_account' %}",  class="option">
-                {% csrf_token %}
-                <h2>Do you want to delete your account?</h2>
-                <button class="add-button2">Press Here</button>
-            </form>
-        </div>
-    </div>
+    <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
+        <form method="GET" action="{% url 'change_data' %}", class="info">
+            {% csrf_token %}
+            <h2>Do you want to change your data? </h2>
+            <button class="box_button">Press Here</button>
+        </form>
+        <form method="GET" action="{% url 'delete_account' %}",  class="info">
+            {% csrf_token %}
+            <h2>Do you want to delete your account?</h2>
+            <button class="box_button2">Press Here</button>
+        </form>
 {% endblock %}

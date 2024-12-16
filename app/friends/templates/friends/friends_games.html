@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Friend Profile{% endblock %}
+
+{% block header_title %}Friend Profile{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'store/store.css' %}">
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <h2>Gry użytkownika: {{ user_games.0.person.username }}</h2>
+    <div class="games-list">
+        {% for game in user_games %}
+            <div class="game-item2">
+                <img src="{{ game.game.image.url }}" alt="{{ game.game.name }}">
+                <h3>{{ game.game.tittle }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}News{% endblock %}
+
+{% block header_title %}News{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'news/news_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="news-container">
+        <h1 class="NewsTitle">{{ news_item.title }}</h1>
+        <p class="NewsDate">{{ news_item.date }}</p>
+        {% if news_item.image %}
+            <img src="{{ news_item.image.url }}" alt="News Image" style="max-width: 100%;">
+        {% endif %}
+        <p class="NewsContent">{{ news_item.content }}</p>
+        <a href="{% url 'news_list' %}" class="NewsBack">Back to News List </a>
+    </div>
+{% endblock %}
