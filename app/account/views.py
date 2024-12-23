@@ -3,15 +3,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ConfirmPasswordForm
 from django.contrib.auth import authenticate
-from coredb.models import Person
+from coredb.models import Person, ExchangeRate
 from django.db.models import Q
 from django.contrib.auth import logout
 
 @login_required
 def account_view(request):
     user = request.user
-    total_balance = user.total_balance
-    return render(request, 'account/account_view.html', {'total_balance': total_balance})
+    user_currency = user.currency
+    total_balance_in_user_currency = ExchangeRate.convert(user.total_balance, "PLN", user_currency)
+    
+    return render(
+        request,
+        'account/account_view.html',
+        {
+            'total_balance': total_balance_in_user_currency,
+            'currency': user_currency,
+        }
+    )
+
 
 
 @login_required

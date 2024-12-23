@@ -56,7 +56,7 @@
                         <tr>
                             <td>{{ expense.date }}</td>
                             <td>{{ expense.game.tittle }}</td>
-                            <td>{{ expense.amount }} PLN</td>
+                            <td>{{ expense.amount_converted }} {{ currency }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -80,7 +80,7 @@
                     {% for income in incomes %}
                         <tr>
                             <td>{{ income.date }}</td>
-                            <td>{{ income.amount }} PLN</td>
+                            <td>{{ income.amount_converted }} {{ currency }}</td>
                         </tr>
                     {% empty %}
                         <tr>

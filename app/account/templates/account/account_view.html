@@ -13,7 +13,7 @@
 
 {% block content %}
 {% csrf_token %}
-    <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
+    <h2 class="title">Your Total Balance: {{ total_balance }} {{ currency }}</h2>
         <form method="GET" action="{% url 'change_data' %}", class="info">
             {% csrf_token %}
             <h2>Do you want to change your data? </h2>

@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('wallet.urls')),
     path('', include('library.urls')),
     path('', include('account.urls')),
-    path('', include('friends.urls'))
+    path('', include('friends.urls')),
+    path('', include('currency.urls')),
 ]
 
 

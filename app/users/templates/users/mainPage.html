@@ -7,6 +7,7 @@
     <title>{% block title %}Home Page{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'mainPage.css' %}">
+    <link rel="stylesheet" href="{% static 'announcement.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -23,18 +24,19 @@
         <a href="{% url 'account_view' %}" class="list"><i class="fas fa-user"></i> Account</a>
         <a href="{% url 'wallet_view' %}" class="list"><i class="fas fa-wallet"></i> Wallet</a>
 
-    <form method="post" action="#" class="mainPage">
-        {% csrf_token %}
-        <div>
-            <label>Choose your currency:</label>
-            <select>
-                <option value="USD" >USD</option>
-                <option value="EUR" >EUR</option>
-                <option value="PLN" >PLN</option>
-            </select>
-        </div>
-        <button>Set Currency</button>
-    </form>
+        <form method="post" action="{% url 'change_currency' %}" class="mainPage">
+            {% csrf_token %}
+            <div>
+                <label>Choose your currency:</label>
+                <select name="currency">
+                    <option value="PLN">PLN</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+            <button>Set Currency</button>
+        </form>
+        
     <a href="{% url 'logout' %}" class="logoutB">Log out</a>
     </div>
     <div class="content-container">

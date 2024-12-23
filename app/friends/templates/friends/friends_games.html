@@ -12,7 +12,7 @@
 
 {% block content %}
 {% csrf_token %}
-    <h2>Gry użytkownika: {{ user_games.0.person.username }}</h2>
+    <h2>Gry użytkownika: {{ friend_username}}</h2>
     <div class="games-list">
         {% for game in user_games %}
             <div class="game-item2">

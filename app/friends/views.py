@@ -101,12 +101,18 @@ def remove_friend(request, friend_id):
 
 @login_required
 def friends_games(request, friend_id):
-    user = get_object_or_404(Friends, id=friend_id)
-    print("1")
-    if user.sender == request.user:
-        user_games = PersonGames.objects.filter(person=user.recipient)
-        print("2")
-    elif user.recipient == request.user:
-        user_games = PersonGames.objects.filter(person=user.sender)
-        print("3")
-    return render(request, 'friends/friends_games.html', {'user_games': user_games})
+    friend_relation = get_object_or_404(Friends, id=friend_id)
+
+    if friend_relation.sender == request.user:
+        friend_user = friend_relation.recipient
+    elif friend_relation.recipient == request.user:
+        friend_user = friend_relation.sender
+    else:
+        print("Error")
+
+    user_games = PersonGames.objects.filter(person=friend_user)
+
+    return render(request, 'friends/friends_games.html', {
+        'user_games': user_games,
+        'friend_username': friend_user.username 
+    })

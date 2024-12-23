@@ -33,7 +33,8 @@ def registration(request):
                 date_of_birth=date_of_birth,
                 currency='PLN' 
             )
-            return redirect('login') 
+            messages.success(request, f"You successfully created your account!")
+            return redirect('login')
         except Exception as e:
             messages.error(request, f"Error during user creation: {str(e)}")
             return render(request, 'users/registerPage.html')
@@ -56,6 +57,7 @@ def login_view(request):
         
         if user is not None:
             login(request, user)
+            messages.success(request, f"Welcome to our store!")
             return redirect('news_list')
         else:
             messages.error(request, "Invalid username or password")

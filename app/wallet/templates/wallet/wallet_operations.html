@@ -12,12 +12,12 @@
 
 {% block content %}
 {% csrf_token %}
-    <h2 class="title">Your Total Balance: {{ total_balance }} PLN</h2>
+    <h2 class="title">Your Total Balance: {{ total_balance }} {{ currency }}</h2>
         <form method="POST" class="option2">
             {% csrf_token %}
             {{ form.amount.label }}
             {{ form.amount }}
-            <span class="currency">PLN</span>
+            <span class="currency">{{ currency }}</span>
             <button type="submit" class="add-button">Submit</button>
         </form>
 {% endblock %}

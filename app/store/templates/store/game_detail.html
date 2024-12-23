@@ -15,7 +15,7 @@
     <div class="game-detail">
         <div>
             <h1 class='tittle'>{{ game.tittle }}</h1>
-            <p class='price'>{{ game.price }} PLN</p>
+            <p class='price'>{{ converted_price }} {{ currency }}</p>
             <p class='description'>{{ game.description }}</p>
                 <div class="button-container">
                     <form method="GET" action="{% url 'buy_game' game.id %}">

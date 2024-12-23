@@ -83,3 +83,7 @@ class NewsAdmin(admin.ModelAdmin):
     
 
 admin.site.register(models.News, NewsAdmin)
+
+class ExchangeRateAdmin(admin.ModelAdmin):
+    list_display = ['currency', 'rate', 'last_updated']
+admin.site.register(models.ExchangeRate, ExchangeRateAdmin)

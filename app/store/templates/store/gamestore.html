@@ -28,7 +28,7 @@
             <div class="game-item" onclick="window.location.href='{% url 'game_detail' game.id %}'">
                 <img src="{{ game.image.url }}" alt="{{ game.name }}">
                 <h3>{{ game.tittle }}</h3>
-                <p>{{ game.price }} PLN</p>
+                <p>{{ game.display_price }} {{ currency }}</p>
                 <form method="post" action="{% url 'buy_game' game.id %}">
                     {% csrf_token %}
                     <button type="submit" class="buy-button">Buy</button>
