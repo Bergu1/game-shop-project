@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends 'users/mainPage.html' %}
+{% load static %}
+
+{% block title %}Confirm Buy{% endblock %}
+
+{% block header_title %}Confirm Buy{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'store/confirm_buy.css' %}">
+<link rel="stylesheet" href="{% static 'announcement.css' %}">
+{% endblock %}
+
+{% block announcement %}
+<div id="popup-message-container">
+    {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+            {{ message }}
+            <button onclick="closePopupMessage()" style="margin-top: 10px;">OK</button>
+        </div>
+    {% endfor %}
+</div>  
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <div class='container'>
+        <h1>Confirm buy</h1>
+        <p>Enter your password to confirm buy. This operation is irreversible!</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Buy game</button>
+        </form>
+        <a href="{% url 'store' %}">Cancel</a>
+    </div>
+    {% block extra_js %}
+    <script>
+    function closePopupMessage() {
+        const messageContainer = document.getElementById("popup-message-container");
+        if (messageContainer) {
+            messageContainer.style.display = "none";
+        }
+    }
+
+    setTimeout(closePopupMessage, 3000);
+    </script>
+    {% endblock %}
+{% endblock %}

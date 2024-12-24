@@ -3,6 +3,10 @@ from coredb.models import Games, AccountHistory, PersonGames, Person, ExchangeRa
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from .forms import ConfirmPasswordForm
+from django.contrib.auth import authenticate
+from decimal import Decimal
+
 
 
 @login_required
@@ -21,29 +25,43 @@ def store_view(request):
 def buy_game(request, id):
     user = request.user
     game = get_object_or_404(Games, id=id)
-    price = game.price
 
-    if PersonGames.objects.filter(person=user, game=game).exists():
-        messages.error(request, "You already own this game.")
-        return redirect('store')
-    
-    if user.total_balance >= price:
-        user.total_balance -= price
-        user.save()
+    if request.method == "POST":
+        form = ConfirmPasswordForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=user.username, password=password)
+            if user:
+                if PersonGames.objects.filter(person=user, game=game).exists():
+                    messages.error(request, "You already own this game.")
+                    return redirect('store')
 
-        AccountHistory.objects.create(
-            person=user,
-            game=game,
-            date=timezone.now(),
-            amount=price
-        )
+                if user.total_balance >= game.price:
+                    user.total_balance -= game.price
+                    user.save()
 
-        PersonGames.objects.create(person=user, game=game, date=timezone.now())
+                    AccountHistory.objects.create(
+                        person=user,
+                        game=game,
+                        date=timezone.now(),
+                        amount=game.price
+                    )
 
-        messages.success(request, "Successful purchase!")
+                    PersonGames.objects.create(person=user, game=game, date=timezone.now())
+
+                    messages.success(request, "Successful purchase!")
+                    return redirect('store')
+                else:
+                    messages.error(request, "Not enough money in your account.")
+                    return redirect('store')
+            else:
+                messages.error(request, "Incorrect password. Please try again.")
+                return redirect('store')
     else:
-        messages.error(request, "Not enough money in your account.")
-    return redirect('store')
+        form = ConfirmPasswordForm()
+
+    return render(request, 'store/confirm_buy.html', {'form': form, 'game': game})
+
 
 
 def game_detail(request, id):
@@ -63,7 +81,7 @@ def game_detail(request, id):
 def buygame_as_gift(request, id):
     game = get_object_or_404(Games, id=id)
 
-    if request.method == "POST":
+    if request.method == "POST" and "username" in request.POST:
         sender = request.user
         recipient_username = request.POST.get("username")
 
@@ -81,36 +99,72 @@ def buygame_as_gift(request, id):
             messages.error(request, f"{recipient.username} already owns this game.")
             return render(request, 'store/buygameasgift.html', {'game': game})
 
-        
         sender_currency = sender.currency
-        game_price_in_sender_currency = ExchangeRate.convert(game.price, "PLN", sender_currency)
+        game_price = game.price
 
-        if sender.total_balance < game_price_in_sender_currency:
+        if sender.total_balance < game_price:
             messages.error(request, "Not enough money in your account.")
             return render(request, 'store/buygameasgift.html', {'game': game})
 
-       
-        sender.total_balance -= game_price_in_sender_currency
-        sender.save()
+        request.session['gift_transaction'] = {
+            'recipient_username': recipient_username,
+            'game_id': game.id,
+            'game_price': float(game_price)
+        }
+        return render(request, 'store/confirm_buy.html', {'game': game, 'form': ConfirmPasswordForm()})
 
-        
-        PersonGames.objects.create(person=recipient, game=game, date=timezone.now())
+    elif request.method == "POST" and "password" in request.POST:
+        form = ConfirmPasswordForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=request.user.username, password=password)
 
-       
-        AccountHistory.objects.create(
-            person=sender,
-            game=game,
-            date=timezone.now(),
-            amount=-game_price_in_sender_currency 
-        )
-        AccountHistory.objects.create(
-            person=recipient,
-            game=game,
-            date=timezone.now(),
-            amount=0,  
-        )
+            if user is None:
+                messages.error(request, "Invalid password.")
+                return render(request, 'store/confirm_buy.html', {'game': game, 'form': form})
 
-        messages.success(request, f"Successfully gifted '{game.tittle}' to {recipient.username}!")
-        return redirect('store')
+            
+            transaction = request.session.get('gift_transaction')
+            if not transaction:
+                messages.error(request, "Transaction details are missing.")
+                return redirect('store')
+
+            recipient_username = transaction['recipient_username']
+            game_price = Decimal(transaction['game_price'])
+            recipient = get_object_or_404(Person, username=recipient_username)
+
+            
+            sender = request.user
+            sender.total_balance -= game_price
+            sender.save()
+
+            PersonGames.objects.create(person=recipient, game=game, date=timezone.now())
+
+            AccountHistory.objects.create(
+                person=sender,
+                game=game,
+                date=timezone.now(),
+                amount=game_price
+            )
+            AccountHistory.objects.create(
+                person=recipient,
+                game=game,
+                date=timezone.now(),
+                amount=0,
+            )
+
+            del request.session['gift_transaction']  # Clean up session
+            messages.success(request, f"Successfully gifted '{game.tittle}' to {recipient.username}!")
+            return redirect('store')
+
+        messages.error(request, "Please correct the errors below.")
+        return render(request, 'store/confirm_buy.html', {'game': game, 'form': form})
 
     return render(request, 'store/buygameasgift.html', {'game': game})
+
+
+
+
+
+
+
