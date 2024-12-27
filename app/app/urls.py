@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('account.urls')),
     path('', include('friends.urls')),
     path('', include('currency.urls')),
+    path('', include('resetpassbymail.urls')),
 ]
 
 

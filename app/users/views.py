@@ -19,8 +19,21 @@ def registration(request):
         if not username:
             messages.error(request, "Recipient username is required.")
             return render(request, 'users/registerPage.html')
+        
+        if not email:
+            messages.error(request, "Email is required.")
+            return render(request, 'users/registerPage.html')
+        
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
+            return render(request, 'users/registerPage.html')
+
+        if Person.objects.filter(email=email).exists():
+            messages.error(request, "This email is already registered.")
+            return render(request, 'users/registerPage.html')
+
+        if Person.objects.filter(username=username).exists():
+            messages.error(request, "This username is already taken.")
             return render(request, 'users/registerPage.html')
 
         try:
