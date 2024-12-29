@@ -1,6 +1,6 @@
 # game-shop-project
 
-# Dokumentacja Backend
+## Backend Documentation
 The file `GameStore_backend_documentation.postman_collection.json` contains detailed backend documentation in the Postman export format (v2.1).
 
 To import the documentation into Postman:
