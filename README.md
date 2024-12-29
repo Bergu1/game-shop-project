@@ -6,4 +6,4 @@ The file `GameStore_backend_documentation.postman_collection.json` contains deta
 To import the documentation into Postman:
 1. Open Postman.
 2. Select the Import option.
-3. Upload the file GameStore_backend_documentation.postman_collection.json.
+3. Upload the file `GameStore_backend_documentation.postman_collection.json`.
