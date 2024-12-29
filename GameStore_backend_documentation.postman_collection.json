@@ -1,0 +1,818 @@
+{
+	"info": {
+		"_postman_id": "d1c466a9-9cab-47bc-a1ae-f3ad9803eec5",
+		"name": "GameStore documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40570695"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/login/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "berguu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Kondziu123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"login",
+						""
+					]
+				},
+				"description": "### Login View Documentation\n\n#### **Function**: `login_view`\n\nThis function manages user login. If the user is already logged in, they are redirected to `news_list`. If not, it allows them to log in.\n\n- **Methods**:\n    \n    - `GET`: Shows the login page (`users/loginPage.html`).\n        \n    - `POST`: Checks the `username` and `password`.\n        \n- **How it works**:\n    \n    1. If the user is logged in, they go to `news_list`.\n        \n    2. If the login is correct, the user is logged in and sent to `news_list`.\n        \n    3. If the login fails, an error is shown, and the login page reloads.\n        \n- **Template**: `users/loginPage.html`\n    \n- **Redirects**:\n    \n    - Successful login: `news_list`\n        \n    - Failed login: Login page with an error."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/registration/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "5mNElgGzEnc1t4wMYyIhpOHUosW4MZVzb7NOJ1ewCoJF7gRbhoHiglqqvatMZXcy",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first-name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "last-name",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "date-of-birth",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/registration/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"registration",
+						""
+					]
+				},
+				"description": "### Registration View Documentation\n\n#### **Function**: `registration`\n\nThis function allows users to create an account. It collects user details, validates the data, and registers the user.\n\n- **Methods**:\n    \n    - `GET`: Shows the registration page (`users/registerPage.html`).\n        \n    - `POST`: Handles user input for registration.\n        \n- **How it works**:\n    \n    1. Collects user data: `first_name`, `last_name`, `email`, `date_of_birth`, `username`, `password`, and `confirm_password`.\n        \n    2. Validates the input:\n        \n        - Ensures `username` is provided.\n            \n        - Checks if `password` matches `confirm_password`.\n            \n    3. If valid:\n        \n        - Creates a new user in the database with default currency set to `PLN`.\n            \n        - Redirects to the `login` page.\n            \n    4. If there’s an error (e.g., invalid data or database issue):\n        \n        - Shows an error message and reloads the registration page.\n            \n- **Template**: `users/registerPage.html`\n    \n- **Redirects**:\n    \n    - Successful registration: `login`\n        \n    - Failed registration: Reloads registration page with an error message."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/news_list/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "GO3XCtjXLIENHNoTzBGV2WyeAg5jwC7n6eyEMovwPH6HhuClOquDDjjpK10IpkyF",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/news_list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"news_list",
+						""
+					]
+				},
+				"description": "### News List View Documentation\n\n#### **Function**: `news_list`\n\nThis function displays a list of news articles, ordered by the most recent. Here the user is transferred after successful login\n\n- **Access**: Requires the user to be logged in (`@login_required`).\n    \n- **Methods**:\n    \n    - `GET`: Retrieves all news articles from the database, ordered by `date` in descending order.\n        \n- **How it works**:\n    \n    1. Fetches all `News` objects from the database.\n        \n    2. Sorts the news by the `date` field, showing the newest first.\n        \n    3. Passes the news list to the `users/news_list.html` template.\n        \n- **Template**: `users/news_list.html`\n    \n- **Context Data**:\n    \n    - `news`: A list of news articles."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/news/4/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "GO3XCtjXLIENHNoTzBGV2WyeAg5jwC7n6eyEMovwPH6HhuClOquDDjjpK10IpkyF",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/news/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"news",
+						"4",
+						""
+					]
+				},
+				"description": "### News Detail View Documentation\n\n#### **Function**: `news_detail`\n\nThis function displays the details of a specific news article.\n\n- **Methods**:\n    \n    - `GET`: Fetches a specific news article by its primary key (`pk`).\n        \n- **How it works**:\n    \n    1. Retrieves the `News` object with the given `pk`.\n        \n        - If no matching article is found, it returns a 404 error.\n            \n    2. Passes the news article to the `users/news_detail.html` template.\n        \n- **Template**: `users/news_detail.html`\n    \n- **Context Data**:\n    \n    - `news_item`: The news article object."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/store/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "GO3XCtjXLIENHNoTzBGV2WyeAg5jwC7n6eyEMovwPH6HhuClOquDDjjpK10IpkyF",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/store/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"store",
+						""
+					]
+				},
+				"description": "### Store View Documentation\n\n#### **Function**: `store_view`\n\nThis function displays the game store page, allowing the logged-in user to view games and sort them based on different criteria.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Fetches the list of games and sorts them based on the selected sorting option.\n    \n\n**Query Parameters**:\n\n- `sort` (optional): Determines the sorting order for the games.\n    \n    - `default`: No specific sorting applied.\n        \n    - `price_asc`: Sorts games by price in ascending order.\n        \n    - `price_desc`: Sorts games by price in descending order.\n        \n    - `name_asc`: Sorts games alphabetically by title (A-Z).\n        \n    - `name_desc`: Sorts games alphabetically by title (Z-A).\n        \n\n**How it works**:\n\n1. Fetches the logged-in user's preferred currency (`user.currency`).\n    \n2. Retrieves the `sort` query parameter to determine the sorting option.\n    \n    - Defaults to `default` if no parameter is provided.\n        \n3. Fetches all games from the database.\n    \n4. Applies sorting based on the selected `sort` option.\n    \n5. Converts each game's price from PLN to the user's preferred currency using `ExchangeRate.convert`.\n    \n6. Passes the games, currency, and sorting option to the template for rendering.\n    \n\n**Template**: `store/gamestore.html`\n\n**Context Data**:\n\n- `games`: A queryset of games, sorted based on the selected option.\n    \n- `currency`: The user's preferred currency.\n    \n- `sort_option`: The currently selected sorting option.\n    \n\n**Redirects**:\n\n- None. This view directly renders the game store page.\n    \n\n**Additional Logic**:\n\n- Provides a flexible and dynamic sorting mechanism to enhance the user experience.\n    \n- Converts game prices dynamically to the user's preferred currency for consistency.\n    \n\nThis view delivers a customizable and user-friendly game store page with sorting functionality."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/game_detail/3/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "GO3XCtjXLIENHNoTzBGV2WyeAg5jwC7n6eyEMovwPH6HhuClOquDDjjpK10IpkyF",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/game_detail/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"game_detail",
+						"3",
+						""
+					]
+				},
+				"description": "### Game Detail View Documentation\n\n#### **Function**: `game_detail`\n\nThis function displays detailed information about a specific game, including its price converted to the logged-in user's preferred currency.\n\n- **Methods**:\n    \n    - `GET`: Fetches a specific game by its ID and calculates its price in the user's currency.\n        \n- **How it works**:\n    \n    1. Retrieves the game object with the given `id` or returns a 404 error if not found.\n        \n    2. Fetches the user's preferred currency from `request.user.currency`.\n        \n    3. Converts the game's price from PLN to the user's currency using `ExchangeRate.convert()`.\n        \n    4. Passes the game, the converted price, and the currency to the template.\n        \n- **Template**: `store/game_detail.html`\n    \n- **Context Data**:\n    \n    - `game`: The game object.\n        \n    - `converted_price`: The game's price in the user's currency.\n        \n    - `currency`: The user's preferred currency."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/buy_game/3/?",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/buy_game/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"buy_game",
+						"3",
+						""
+					]
+				},
+				"description": "StartFragment\n\n### Buy Game View Documentation\n\n#### **Function**: `buy_game`\n\nThis function allows a logged-in user to purchase a game if they have enough balance and do not already own it.\n\n- **Access**: Requires the user to be logged in (`@login_required`).\n    \n- **Methods**:\n    \n    - `GET`: Displays a confirmation form for purchasing the game.\n        \n    - `POST`: Handles the purchase after validating the user's password and checking conditions.\n        \n- **How it works**:\n    \n    1. Fetches the game by `id` or returns a 404 error if not found.\n        \n    2. If the request is `POST`:\n        \n        - Validates the password via `ConfirmPasswordForm`.\n            \n        - Checks if the user already owns the game:\n            \n            - If yes, shows an error message and redirects to the store.\n                \n        - Checks if the user has enough balance:\n            \n            - If yes:\n                \n                - Deducts the game price from the user's balance.\n                    \n                - Saves the transaction in `AccountHistory`.\n                    \n                - Adds the game to the user's library via `PersonGames`.\n                    \n                - Shows a success message and redirects to the store.\n                    \n            - If no, shows an error message about insufficient balance.\n                \n        - If the password is incorrect, shows an error message.\n            \n    3. If the request is `GET`, renders the confirmation form.\n        \n- **Template**: `store/confirm_buy.html`\n    \n- **Context Data**:\n    \n    - `form`: An instance of `ConfirmPasswordForm` for password confirmation.\n        \n    - `game`: The game object being purchased.\n        \n- **Redirects**:\n    \n    - Successful purchase: Redirects to the store (`store`).\n        \n    - Errors (e.g., insufficient balance, incorrect password): Redirects to the store with appropriate messages."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/buy_gift/4/?",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/buy_gift/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"buy_gift",
+						""
+					]
+				},
+				"description": "StartFragment\n\n### Buy Game as Gift View Documentation\n\n#### **Function**: `buygame_as_gift`\n\nThis function allows a logged-in user to purchase a game as a gift for another user.\n\n- **Access**: Requires the user to be logged in (`@login_required`).\n    \n\n### **Methods**\n\n1. **`GET`**:\n    \n    - Renders the gift purchase page with game details.\n        \n2. **`POST`**:\n    \n    - **Step 1**: Handles the recipient selection and transaction setup.\n        \n        - Validates recipient username.\n            \n        - Checks if the recipient already owns the game.\n            \n        - Confirms the sender's balance is sufficient.\n            \n        - Saves transaction details to the session and renders the password confirmation form.\n            \n    - **Step 2**: Confirms the transaction after validating the sender's password.\n        \n        - Deducts the game price from the sender's balance.\n            \n        - Adds the game to the recipient's library.\n            \n        - Logs the transaction in `AccountHistory` for both sender and recipient.\n            \n        - Cleans up the session and redirects to the store.\n            \n\n### **How it works**\n\n1. **Recipient Validation**:\n    \n    - Fetches the recipient by their username.\n        \n    - Verifies the recipient doesn’t already own the game.\n        \n2. **Transaction Setup**:\n    \n    - Ensures the sender has enough funds for the gift.\n        \n    - Stores transaction details (recipient username, game ID, price) in the session.\n        \n3. **Password Confirmation**:\n    \n    - Validates the sender’s password.\n        \n    - Completes the transaction by:\n        \n        - Deducting the game price from the sender's balance.\n            \n        - Adding the game to the recipient’s library.\n            \n        - Logging the transaction in `AccountHistory`.\n            \n\n### **Template**:\n\n- **Initial Gift Form**: `store/buygameasgift.html`\n    \n- **Password Confirmation Form**: `store/confirm_buy.html`\n    \n\n### **Context Data**:\n\n- **Initial Form**:\n    \n    - `game`: The game object being gifted.\n        \n- **Confirmation Form**:\n    \n    - `form`: An instance of `ConfirmPasswordForm`.\n        \n    - `game`: The game object being gifted.\n        \n\n### **Redirects**:\n\n- Successful Gift: Redirects to `store` with a success message.\n    \n- Errors (e.g., insufficient funds, invalid recipient): Reloads the relevant form with an error message.\n    \n\n### **Example Workflow**:\n\n1. User selects a game to gift.\n    \n2. Enters the recipient's username and confirms the transaction.\n    \n3. Enters their password to finalize the gift.\n    \n4. The recipient receives the gifted game, and the transaction is logged."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/library/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/library/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"library",
+						""
+					]
+				},
+				"description": "### Library View Documentation\n\n#### **Function**: `library_view`\n\nThis function displays the logged-in user's game library.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Retrieves all games owned by the user.\n    \n\n**How it works**:\n\n1. Fetches the logged-in user's games from the `PersonGames` model.\n    \n2. Passes the list of owned games to the template for rendering.\n    \n\n**Template**: `library/library.html`\n\n**Context Data**:\n\n- `user_games`: A queryset containing all games owned by the logged-in user."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/friends/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/friends/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friends",
+						""
+					]
+				},
+				"description": "### Friends View Documentation\n\n#### **Function**: `friends`\n\nThis function displays the main friends page for the logged-in user.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Renders the main friends page.\n    \n\n**How it works**:\n\n1. The logged-in user accesses the view.\n    \n2. The page is rendered using the `friends/main_friends.html` template.\n    \n\n**Template**: `friends/main_friends.html`"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/send_friend_request/?",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/send_friend_request/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"send_friend_request",
+						""
+					]
+				},
+				"description": "### Send Friend Request View Documentation\n\n#### **Function**: `send_friend_request`\n\nThis function allows a logged-in user to send a friend request to another user.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays the friend request form.\n    \n- `POST`: Handles the submission of the friend request.\n    \n\n**How it works**:\n\n1. If the request is `POST`, the form is validated:\n    \n    - Retrieves the recipient's username from the form.\n        \n    - Performs the following checks:\n        \n        - Ensures the recipient username exists.\n            \n        - Ensures a friend request has not already been sent.\n            \n        - Ensures the user is not sending a request to themselves.\n            \n        - Ensures the users are not already friends.\n            \n    - If all checks pass, creates a new `Friends` object representing the friend request.\n        \n    - Displays a success message if the request is sent or an error message if a check fails.\n        \n2. If the request is `GET`, displays the empty friend request form.\n    \n\n**Template**: `friends/send_friend_request.html`\n\n**Context Data**:\n\n- `form`: An instance of `FriendForm` for entering the recipient's username.\n    \n\n**Redirects**:\n\n- On successful or failed submission, redirects back to the `send_friend_request` view to reload the form.\n    \n\n**Additional Logic**:\n\n- Prevents sending duplicate requests or requests to oneself.\n    \n- Ensures users are not already friends before sending a new request.\n    \n\nThis view provides a secure and user-friendly way to manage friend request submissions."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/invitations/?",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/invitations/?",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"invitations",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				},
+				"description": "### Invitations View Documentation\n\n#### **Function**: `invitations`\n\nThis function allows a logged-in user to view and manage their friend requests, including accepting or rejecting incoming requests.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays the user's sent and received friend requests.\n    \n- `POST`: Handles actions on received friend requests, such as accepting or rejecting them.\n    \n\n**How it works**:\n\n1. **Friend Requests**:\n    \n    - Fetches friend requests sent by the user (`sent_requests`).\n        \n    - Fetches friend requests received by the user that are still pending (`received_requests`).\n        \n2. **Handling POST Requests**:\n    \n    - Retrieves the action (`accept` or `reject`) and the `request_id` of the friend request from the form.\n        \n    - Validates that the request exists and the recipient matches the logged-in user.\n        \n    - Updates the status of the friend request to `accepted` or `rejected`.\n        \n    - Saves the changes and reloads the invitations page.\n        \n\n**Template**: `friends/invitation_status.html`\n\n**Context Data**:\n\n- `sent_requests`: A queryset containing all friend requests sent by the user.\n    \n- `received_requests`: A queryset containing all pending friend requests received by the user.\n    \n\n**Redirects**:\n\n- After processing an action (`accept` or `reject`), redirects back to the `invitations` view to refresh the page.\n    \n\n**Additional Logic**:\n\n- Prevents unauthorized actions by ensuring the request belongs to the logged-in user before making updates.\n    \n- Allows users to manage their friend requests efficiently.\n    \n\nThis view provides an organized interface for tracking and managing friend requests, both sent and received."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/friends_list/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/friends_list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friends_list",
+						""
+					]
+				},
+				"description": "### Friends List View Documentation\n\n#### **Function**: `friends_list`\n\nThis function displays a list of all friends for the logged-in user.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Fetches and displays a list of all accepted friends for the user.\n    \n\n**How it works**:\n\n1. Queries the `Friends` model for all friend connections where:\n    \n    - The user is the sender and the status is `accepted`.\n        \n    - The user is the recipient and the status is `accepted`.\n        \n2. Combines these results into a single list, ensuring no duplicates.\n    \n3. Passes the list of friends to the template for rendering.\n    \n\n**Template**: `friends/friends_list.html`\n\n**Context Data**:\n\n- `friends_list`: A deduplicated list of all friends of the logged-in user.\n    \n\n**Redirects**:\n\n- None. This view directly renders the friends list.\n    \n\n**Additional Logic**:\n\n- Ensures no duplicate entries in the friends list.\n    \n- Efficiently manages friend relationships where the user can be either the sender or recipient.\n    \n\nThis view provides a clean and comprehensive list of all friends for the logged-in user."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/friends/friends_games/16/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/friends/friends_games/16/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friends",
+						"friends_games",
+						"16",
+						""
+					]
+				},
+				"description": "### Friends Games View Documentation\n\n#### **Function**: `friends_games`\n\nThis function displays the game library of a friend for the logged-in user.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Fetches and displays the list of games owned by the specified friend.\n    \n\n**How it works**:\n\n1. Retrieves the friend relationship using the provided `friend_id`.\n    \n2. Verifies that the logged-in user is part of the friend relationship (either as the sender or recipient).\n    \n3. Identifies the friend user (the other participant in the relationship).\n    \n4. Fetches all games owned by the friend from the `PersonGames` model.\n    \n5. Passes the friend’s game library and username to the template for rendering.\n    \n\n**Template**: `friends/friends_games.html`\n\n**Context Data**:\n\n- `user_games`: A queryset containing all games owned by the friend.\n    \n- `friend_username`: The username of the friend whose games are being displayed.\n    \n\n**Redirects**:\n\n- None. This view directly renders the friend's game library.\n    \n\n**Additional Logic**:\n\n- Ensures that the logged-in user is part of the friend relationship before granting access to the friend's game library.\n    \n\nThis view allows users to browse the games owned by their friends in a secure and user-friendly way."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/account_view/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/account_view/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"account_view",
+						""
+					]
+				},
+				"description": "#### **Function**: `account_view`\n\nThis function displays an overview of the logged-in user's account, including their total balance converted to their preferred currency.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Fetches and displays the user's account details.\n    \n\n**How it works**:\n\n1. Retrieves the logged-in user's total balance in PLN (`user.total_balance`).\n    \n2. Converts the total balance from PLN to the user's preferred currency (`user.currency`) using `ExchangeRate.convert`.\n    \n3. Passes the converted balance and currency to the template for rendering.\n    \n\n**Template**: `account/account_view.html`\n\n**Context Data**:\n\n- `total_balance`: The user's total balance converted to their preferred currency.\n    \n- `currency`: The user's preferred currency (e.g., PLN, EUR, USD).\n    \n\n**Redirects**:\n\n- None. This view directly renders the account overview page.\n    \n\nThis view provides a concise and user-friendly overview of the user's financial details."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/change_data/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/change_data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"change_data",
+						""
+					]
+				},
+				"description": "### Change Data View Documentation\n\n#### **Function**: `change_data`\n\nThis function allows logged-in users to update specific account details, such as their name, email, username, date of birth, or password.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays the page for updating user details.\n    \n- `POST`: Handles updates to user account details based on the provided data.\n    \n\n**How it works**:\n\n1. **Form Submission (****`POST`****)**:\n    \n    - Retrieves the field to update (`record_to_update`) and the new value (`new_value`) from the request.\n        \n    - Updates the specified field:\n        \n        - **`first_name`**: Updates the user's first name.\n            \n        - **`last_name`**: Updates the user's last name.\n            \n        - **`email`**: Checks for duplicates before updating the user's email.\n            \n        - **`date-of-birth`**: Updates the user's profile date of birth.\n            \n        - **`username`**: Checks for duplicates before updating the user's username.\n            \n        - **`password`**: Updates the user's password, logs the user out, and prompts them to log in again.\n            \n    - Saves the updated user data and displays a success or error message.\n        \n2. **Error Handling**:\n    \n    - If a duplicate email or username is detected, an error message is displayed, and the update is aborted.\n        \n    - Any other errors are caught and displayed to the user.\n        \n3. **Rendering (****`GET`****)**:\n    \n    - Displays the page for changing user details.\n        \n\n**Template**: `account/change_data.html`\n\n**Context Data**:\n\n- None. All required data is retrieved directly from the `POST` request.\n    \n\n**Redirects**:\n\n- Successful password change: Redirects to the `login` page and logs the user out.\n    \n- Other successful updates: Redirects back to the `change_data` page with a success message.\n    \n- Errors: Redirects back to the `change_data` page with an error message.\n    \n\n**Additional Logic**:\n\n- Prevents duplicate emails and usernames by checking against existing records.\n    \n- Ensures sensitive actions like password updates prompt the user to log in again for security.\n    \n\nThis view provides a flexible and user-friendly interface for updating account information securely."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/delete_account/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/delete_account/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"delete_account",
+						""
+					]
+				},
+				"description": "### Delete Account View Documentation\n\n#### **Function**: `delete_account`\n\nThis function allows the logged-in user to delete their account after confirming their password.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays a confirmation form for account deletion.\n    \n- `POST`: Processes the account deletion request after validating the user's password.\n    \n\n**How it works**:\n\n1. If the request is `POST`:\n    \n    - The `ConfirmPasswordForm` is validated.\n        \n    - If the password is correct:\n        \n        - Deletes the user account from the database.\n            \n        - Displays a success message.\n            \n        - Redirects to the `login` page.\n            \n    - If the password is incorrect, an error message is displayed.\n        \n2. If the request is `GET`, an empty `ConfirmPasswordForm` is rendered.\n    \n\n**Template**: `account/confirm_delete_account.html`\n\n**Context Data**:\n\n- `form`: An instance of `ConfirmPasswordForm` for password confirmation.\n    \n\n**Redirects**:\n\n- Successful account deletion: Redirects to the `login` page.\n    \n- Incorrect password: Reloads the confirmation form with an error message.\n    \n\nThis view provides a secure and straightforward way for users to delete their accounts."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/wallet_view/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/wallet_view/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"wallet_view",
+						""
+					]
+				},
+				"description": "### Wallet View Documentation\n\n#### **Function**: `wallet_view`\n\nThis function displays the logged-in user's wallet balance, converted to their preferred currency.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Fetches and displays the user's wallet balance.\n    \n\n**How it works**:\n\n1. Retrieves the logged-in user's total balance (`user.total_balance`) stored in PLN.\n    \n2. Converts the total balance from PLN to the user's preferred currency (`user.currency`) using the `ExchangeRate.convert` method.\n    \n3. Passes the converted balance and the currency to the template for rendering.\n    \n\n**Template**: `wallet/wallet_view.html`\n\n**Context Data**:\n\n- `total_balance`: The user's total balance, converted to their preferred currency.\n    \n- `currency`: The user's preferred currency (e.g., PLN, EUR, USD).\n    \n\n**Redirects**:\n\n- None. This view directly renders the wallet page.\n    \n\nThis view provides a user-friendly interface for displaying wallet information in the user's preferred currency."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/wallet_operations/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/wallet_operations/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"wallet_operations",
+						""
+					]
+				},
+				"description": "### Wallet Operations View Documentation\n\n#### **Function**: `wallet_operations`\n\nThis function allows the logged-in user to perform wallet operations, such as adding funds to their balance, with amounts converted to PLN from the user's preferred currency.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays the current balance and a form for entering the amount to add to the wallet.\n    \n- `POST`: Processes the addition of funds to the user's wallet.\n    \n\n**How it works**:\n\n1. **Retrieve and Display Balance**:\n    \n    - Fetches the user's current balance in PLN.\n        \n    - Converts the balance to the user's preferred currency using `ExchangeRate.convert`.\n        \n2. **Form Submission (POST)**:\n    \n    - Validates the `AmountForm` to ensure the user has entered a valid amount.\n        \n    - Converts the entered amount from the user's currency to PLN using `ExchangeRate.convert`.\n        \n    - Uses a transaction to:\n        \n        - Log the operation in `AccountHistory` with the amount in PLN.\n            \n        - Update the user's total balance by adding the PLN equivalent.\n            \n    - Redirects to `wallet_view` upon successful operation.\n        \n3. **Form Rendering (GET)**:\n    \n    - Renders the `AmountForm` for the user to input the amount.\n        \n\n**Template**: `wallet/wallet_operations.html`\n\n**Context Data**:\n\n- `total_balance`: The user's current total balance, converted to their preferred currency.\n    \n- `currency`: The user's preferred currency (e.g., PLN, EUR, USD).\n    \n- `form`: An instance of `AmountForm` for entering the amount to add.\n    \n\n**Redirects**:\n\n- Successful operation: Redirects to `wallet_view` to display the updated balance.\n    \n\n**Additional Logic**:\n\n- Ensures atomicity of the transaction to maintain database consistency.\n    \n- Converts all currency amounts to PLN for uniform storage and operations.\n    \n\nThis view provides a secure and user-friendly way for users to manage their wallet and add funds in their preferred currency."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/account_history/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "BLvRgBFwV80bfRf8ChVz2HZZqmkFkRSlElXWk2Cl9kazcIjb9xgdJ7H04l93XLKZ",
+						"type": "text"
+					},
+					{
+						"key": "sessionid",
+						"value": "6uejm43ymrksc2j260nxb8e108nohnj7",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/account_history/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"account_history",
+						""
+					]
+				},
+				"description": "### Account History View Documentation\n\n#### **Function**: `account_history`\n\nThis function displays the user's account history, including incomes and expenses, filtered by month and year. All amounts are displayed in the user's preferred currency.\n\n**Access**: Requires the user to be logged in (`@login_required`).\n\n**Methods**:\n\n- `GET`: Displays the user's account history filtered by optional query parameters for month and year.\n    \n\n**Query Parameters**:\n\n- `month` (optional): Filters account history by the specified month (integer, 1–12).\n    \n- `year` (optional): Filters account history by the specified year.\n    \n\n### **How it Works**\n\n#### **1\\. Fetch Current Year and Generate Year Range**\n\n- Calculates the current year.\n    \n- Generates a range of the next 10 years for use in the template.\n    \n\n#### **2\\. Filter Account History**\n\n- Retrieves optional `month` and `year` query parameters.\n    \n- Filters the user's `AccountHistory` by the specified month and year, if provided.\n    \n\n#### **3\\. Currency Conversion**\n\n- Converts each entry’s amount from PLN to the user's preferred currency using `ExchangeRate.convert`.\n    \n- Adds a rounded `amount_converted` attribute to each entry.\n    \n\n#### **4\\. Categorize Entries**\n\n- Divides entries into:\n    \n    - **incomes:** Entries with no associated game (e.g., wallet top-ups).\n        \n    - **expenses:** Entries with an associated game (e.g., game purchases).\n        \n\n#### **5\\. Generate PDF Option**\n\n- Provides an option to generate a PDF report of the user's account history, including:\n    \n    - **All incomes and expenses:** Filtered by the selected month and year.\n        \n    - **Entries in preferred currency:** Amounts converted for clarity.\n        \n- The PDF is formatted for easy readability, showing:\n    \n    - Detailed transaction data.\n        \n    - Categories (incomes and expenses).\n        \n    - Total amounts for each category.\n        \n\n**Template**: `wallet/account_history.html`\n\n**Context Data**:\n\n- `years`: A list of the current year and the next 10 years for use in filtering.\n    \n- `incomes`: A list of income entries (e.g., wallet top-ups), converted to the user's currency.\n    \n- `expenses`: A list of expense entries (e.g., game purchases), converted to the user's currency.\n    \n- `currency`: The user's preferred currency.\n    \n\n**Redirects**:\n\n- None. This view directly renders the account history page.\n    \n\n**Additional Logic**:\n\n- Handles invalid `month` or `year` parameters gracefully (ignores invalid values).\n    \n- Ensures accurate and secure currency conversion for all entries.\n    \n\nThis view provides a detailed and user-friendly interface for viewing and filtering account history by date and transaction type."
+			},
+			"response": []
+		}
+	]
+}
