@@ -13,12 +13,28 @@ from decimal import Decimal
 def store_view(request):
     user_currency = request.user.currency
 
+    sort_option = request.GET.get('sort', 'default')
+
     games = Games.objects.all()
+
+    if sort_option == 'price_asc':
+        games = games.order_by('price')
+    elif sort_option == 'price_desc':
+        games = games.order_by('-price')
+    elif sort_option == 'name_asc':
+        games = games.order_by('tittle')
+    elif sort_option == 'name_desc':
+        games = games.order_by('-tittle')
 
     for game in games:
         game.display_price = ExchangeRate.convert(game.price, "PLN", user_currency)
 
-    return render(request, 'store/gamestore.html', {'games': games, 'currency': user_currency})
+    return render(request, 'store/gamestore.html', {
+        'games': games,
+        'currency': user_currency,
+        'sort_option': sort_option,
+    })
+
 
 
 @login_required

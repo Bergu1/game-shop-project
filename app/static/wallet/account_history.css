@@ -85,3 +85,34 @@ table td {
 table th {
     background-color: #f4f4f4;
 }
+
+
+.generate-pdf {
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 150px;
+    margin-top: 20px;
+}
+
+.generate-pdf:hover {
+    background-color: #222;
+    transform: scale(1.05);
+}
+
+.generate-pdf:active {
+    background-color: #222;
+    transform: scale(0.95);
+}
+
+.generate-pdf:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}

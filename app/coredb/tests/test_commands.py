@@ -7,7 +7,6 @@ from django.db.utils import OperationalError
 from django.test import SimpleTestCase
 
 
-# command which we gonna be mocking
 @patch('coredb.management.commands.wait_for_db.Command.check')
 class CommandTests(SimpleTestCase):
 

@@ -61,7 +61,7 @@ def change_data(request):
                     return redirect('change_data')
                 user.email = new_value
             elif record_to_update == 'date-of-birth':
-                user.profile.date_of_birth = new_value
+                user.date_of_birth = new_value
             elif record_to_update == 'username':
                 if Person.objects.filter(Q(username=new_value) & ~Q(id=user.id)).exists():
                     messages.error(request, "This username is already taken.")

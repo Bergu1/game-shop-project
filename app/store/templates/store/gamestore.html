@@ -23,6 +23,18 @@
 {% endblock %}
 
 {% block content %}
+    <div class="sorting-options">
+        <form method="GET" action="">
+            <label for="sort">Sort by:</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="default" {% if sort_option == 'default' %}selected{% endif %}>Default</option>
+                <option value="price_asc" {% if sort_option == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                <option value="price_desc" {% if sort_option == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                <option value="name_asc" {% if sort_option == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
+                <option value="name_desc" {% if sort_option == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
+            </select>
+        </form>
+    </div>
     <div class="games-list">
         {% for game in games %}
             <div class="game-item" onclick="window.location.href='{% url 'game_detail' game.id %}'">

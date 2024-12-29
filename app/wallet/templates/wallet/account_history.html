@@ -40,6 +40,13 @@
         <button type="submit">Submit</button>
     </form>
 
+    <form method="GET" action="" class="pdf-generation">
+        <input type="hidden" name="month" value="{{ month }}">
+        <input type="hidden" name="year" value="{{ year }}">
+        <input type="hidden" name="pdf" value="true">
+        <button type="submit" class="generate-pdf">Download PDF</button>
+    </form>
+    
     <div class="tables-container">
         <div class="table-expenses">
             <h2>Expenses</h2>
