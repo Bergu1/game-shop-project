@@ -18,6 +18,7 @@ services:
       - DB_NAME=gameshopdb
       - DB_USER=devkonrad
       - DB_PASS=2003
+      - DEBUG=1
     depends_on:
       - db
   
