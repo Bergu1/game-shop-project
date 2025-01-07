@@ -44,4 +44,4 @@ To import the documentation into Postman:
 
 ## Live Demo 
 You can view the live application at this link:
-[Money Manager - Live Demo](http://ec2-52-91-102-211.compute-1.amazonaws.com/login/)
+[game - shop - project - Live Demo](http://ec2-52-91-102-211.compute-1.amazonaws.com/login/)
