@@ -84,6 +84,19 @@ class NewsAdmin(admin.ModelAdmin):
 
 admin.site.register(models.News, NewsAdmin)
 
+from django.contrib import admin
+from .models import ExchangeRate
+
+@admin.register(ExchangeRate)
 class ExchangeRateAdmin(admin.ModelAdmin):
-    list_display = ['currency', 'rate', 'last_updated']
-admin.site.register(models.ExchangeRate, ExchangeRateAdmin)
+    list_display = ('currency', 'rate', 'last_updated')
+    actions = ['fetch_exchange_rates']
+
+    def fetch_exchange_rates(self, request, queryset):
+        try:
+            ExchangeRate.fetch_exchange_rates()
+            self.message_user(request, "Curses have been succesfully changed.")
+        except Exception as e:
+            self.message_user(request, f"Error while download curses: {str(e)}", level="error")
+
+    fetch_exchange_rates.short_description = "Download curses from NBP"

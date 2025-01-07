@@ -136,7 +136,7 @@ class ExchangeRate(models.Model):
                         }
                     )
         else:
-            raise Exception(f"Błąd podczas pobierania danych z API NBP: {response.status_code}")
+            raise Exception(f"Faild while downloading curses from NBP: {response.status_code}")
     
 
     @staticmethod
@@ -158,4 +158,4 @@ class ExchangeRate(models.Model):
                 amount_in_pln = amount * Decimal(rate_from)
                 return round(amount_in_pln / Decimal(rate_to), 2)
         except ExchangeRate.DoesNotExist:
-            raise ValueError("Nie znaleziono kursu wymiany dla podanych walut.")
+            raise ValueError("There is no curse for this currency")
