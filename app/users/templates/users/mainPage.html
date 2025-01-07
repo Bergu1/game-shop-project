@@ -29,9 +29,9 @@
             <div>
                 <label>Choose your currency:</label>
                 <select name="currency">
-                    <option value="PLN">PLN</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
+                    <option value="PLN" {% if request.user.currency == "PLN" %}selected{% endif %}>PLN</option>
+                    <option value="USD" {% if request.user.currency == "USD" %}selected{% endif %}>USD</option>
+                    <option value="EUR" {% if request.user.currency == "EUR" %}selected{% endif %}>EUR</option>
                 </select>
             </div>
             <button>Set Currency</button>
