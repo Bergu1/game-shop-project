@@ -24,7 +24,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 200px;
+    width: 170px;
     height: 100%;
     background-color: #222;
     padding: 120px 20px;
@@ -39,7 +39,7 @@ body {
     color: #fff;
     text-decoration: none;
     margin: 25px 10px;
-    font-size: large;
+    font-size: medium;
     
 }
 
@@ -80,7 +80,7 @@ form.mainPage label {
     font-weight: bold;
     color: white;
     margin-bottom: 5px;
-    font-size:14px;
+    font-size:12px;
 }
 
 form.mainPage select {
@@ -100,7 +100,7 @@ form.mainPage button {
     border: none;
     border-radius: 3px;
     font-weight: bold;
-    font-size: medium;
+    font-size: small;
     cursor: pointer;
 }
 

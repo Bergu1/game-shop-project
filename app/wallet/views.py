@@ -109,7 +109,8 @@ def account_history(request):
     user = request.user
     user_currency = user.currency
     current_year = datetime.now().year
-    years = list(range(current_year, current_year + 10))
+    years = list(range(current_year - 10, current_year + 1))
+    years.reverse()
 
     month = request.GET.get('month')
     year = request.GET.get('year')
@@ -236,5 +237,6 @@ def account_history(request):
         'currency': user_currency,
         'month': month,
         'year': year,
+        'current_year': current_year,
     })
 

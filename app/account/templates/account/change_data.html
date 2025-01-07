@@ -57,6 +57,14 @@
             updateInput.type = 'text'; 
         }
     }
+    
+    function closePopupMessage() {
+        const messageContainer = document.getElementById("popup-message-container");
+        if (messageContainer) {
+            messageContainer.style.display = "none";
+        }
+    }
 
+    setTimeout(closePopupMessage, 3000);
 </script>
 {% endblock %}

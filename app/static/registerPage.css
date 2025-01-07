@@ -15,12 +15,12 @@
 
 .register-container{
     height: auto;
-    width: 350px;
+    width: 320px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
-    left: 35%;
+    left: 34%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
@@ -32,12 +32,12 @@
 
 .register-container2{
     height: auto;
-    width: 350px;
+    width: 320px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
-    left: 65%;
+    left: 68%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
@@ -59,7 +59,7 @@
 
 input{
     display: block;
-    height: 45px;
+    height: 40px;
     width: 90%;
     background-color: rgba(255,255,255,0.07);
     border-radius: 5px;
@@ -88,7 +88,7 @@ button:hover{
 }
 
 .bottom-options{
-    font-size:18px;
+    font-size:16px;
     text-align: center;
 }
 

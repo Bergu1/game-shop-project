@@ -15,7 +15,7 @@
 
 .login-container{
     height: auto;
-    width: 350px;
+    width: 320px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
@@ -32,7 +32,7 @@
 
 input{
     display: block;
-    height: 50px;
+    height: 45px;
     width: 92%;
     background-color: rgba(255,255,255,0.07);
     border-radius: 5px;

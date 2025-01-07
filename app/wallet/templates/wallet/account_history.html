@@ -33,7 +33,11 @@
         <label for="year">Year:</label>
         <select name="year" id="year">
             {% for year in years %}
-            <option value="{{ year }}">{{ year }}</option>
+                {% if year == current_year %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
             {% endfor %}
         </select>
 

@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Styl dla tytułu */
 .NewsTitle {
     font-size: 2rem; 
     color: #333; 
@@ -15,10 +14,9 @@
     font-family: 'Arial', sans-serif; 
     text-transform: uppercase; 
     letter-spacing: 2px;
-    margin-left: 200px;
+    margin-left: 100px;
 }
 
-/* Styl dla daty */
 .NewsDate {
     font-size: 1.2rem;
     color: #666;
@@ -27,30 +25,27 @@
     margin-left: 100px;
 }
 
-/* Obraz z tekstem otaczającym */
 img {
     float: left;
     margin: 0 1.5rem 1.5rem 0;
-    max-width: 50%;
+    max-width: 30%;
     border: 2px solid #ddd;
     border-radius: 8px;
     margin-left: 100px;
 }
 
-/* Styl dla treści artykułu */
 .NewsContent {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     color: #444;
     text-align: justify;
     margin-left: 100px;
 }
 
-/* Link powrotu */
 .NewsBack {
     display: inline-block;
-    margin-top: 2rem;
-    font-size: 1.2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #007BFF;
     text-decoration: none;
