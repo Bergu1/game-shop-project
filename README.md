@@ -1,7 +1,8 @@
 # Game Shop Project
 
 ## Description
-The **Game Shop Project** is a web application designed for purchasing and gifting games. Users can manage their accounts, wallets, and friend lists, while enjoying features like currency conversion, detailed game browsing, and PDF account history exports.
+
+The **Game Shop Project** is a web application inspired by Steam, where users can purchase games, explore what games their friends own, and manage their gaming experience. The platform offers features like account management, friend lists, wallet integration, currency conversion, detailed game browsing, and the ability to export account history as PDF reports.
 
 ## Features
 - **Account Management**: Register, log in, update account details, and delete accounts.
@@ -40,3 +41,7 @@ To import the documentation into Postman:
 1. Open Postman.
 2. Select the Import option.
 3. Upload the file `GameStore_backend_documentation.postman_collection.json`.
+
+## Live Demo 
+You can view the live application at this link:
+[Money Manager - Live Demo](http://ec2-52-91-102-211.compute-1.amazonaws.com/login/)
