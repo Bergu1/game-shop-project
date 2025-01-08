@@ -17,6 +17,7 @@ The **Game Shop Project** is a web application inspired by Steam, where users ca
 - **Database**: PostgreSQL
 - **Other**: Git, Docker, Github Actions, AWS
 - **Tests**: Unittests, Integration Testing
+- **Documentation**: Postman
 - **Currency Conversion**: Real-time conversion between supported currencies (PLN, USD, EUR).
 
 ## Running the Project with Docker
